@@ -1,0 +1,177 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.nav--scrolled {
+  background: #f5faff;
+  border-bottom-color: var(--glass-border);
+  box-shadow: 0 4px 20px rgba(6, 6, 93, 0.06);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 78px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.nav-logo-img {
+  height: 30px;      /* fixed height only */
+  width: auto;       /* width always derives from aspect ratio — never fixed, so it can't stretch */
+  max-width: none;
+  object-fit: contain;
+  display: block;
+}
+
+/* ---- site nav ---- */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  padding: 9px 16px;
+  border-radius: 100px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+@media (hover: hover) {
+  .nav-link:hover {
+    color: var(--ink-strong);
+    background: rgba(6, 6, 93, 0.05);
+  }
+}
+
+.nav-link.is-active {
+  color: var(--ink-headline);
+  background: rgba(4, 100, 222, 0.1);
+  font-weight: 600;
+}
+
+/* ---- right cluster: divider + brand switcher ---- */
+/* margin-left: auto pins this to the far right regardless of whether
+   .nav-links is visible — fixes it from ever drifting to center on
+   narrower screens (previously relied on .nav-links' flex:1, which
+   broke once .nav-links was hidden below 900px). */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.nav-divider {
+  width: 1px;
+  height: 26px;
+  background: var(--glass-border-strong);
+}
+
+.nav-brands {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px;
+  border-radius: 100px;
+  background: rgba(6, 6, 93, 0.04);
+  border: 1px solid var(--glass-border);
+}
+
+.nav-brand-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.nav-brand-pill:active {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) {
+  .nav-brand-pill:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.nav-brand-pill.brand-agro {
+  color: #14532d;
+  background: rgba(140, 255, 137, 0.55);
+}
+
+.nav-brand-pill.brand-studio {
+  color: #322169;
+  background: rgba(200, 178, 255, 0.55);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--ink-strong);
+}
+
+.nav-mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-toggle {
+    display: inline-flex;
+  }
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    background: #f5faff;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .nav-mobile.is-open {
+    max-height: 320px;
+  }
+  .nav-mobile-link {
+    padding: 16px 28px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    border-bottom: 1px solid rgba(6, 6, 93, 0.06);
+  }
+  .nav-mobile-link.is-active {
+    color: var(--ink-headline);
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav-brand-pill span {
+    display: none;
+  }
+  .nav-brand-pill {
+    padding: 9px;
+  }
+}
